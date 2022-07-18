@@ -1,3 +1,4 @@
+import { ThisReceiver } from "@angular/compiler";
 import { Component, OnInit } from "@angular/core";
 import { Course } from "./course";
 import { CourseService } from "./course.service";
@@ -31,6 +32,16 @@ export class CourseListComponent implements OnInit {
             error: err => console.log('Error', err) 
         });
 
+    }
+
+    deleteById (courseId: number): void {
+        this.courseService.deleteById(courseId).subscribe({
+            next: () => {
+                console.log ('Deleted with sucess');
+                this.retrieveAll();
+            },
+            error: err => console.log ('Error', err)
+        })
     }
 
     set filter(value: string){
